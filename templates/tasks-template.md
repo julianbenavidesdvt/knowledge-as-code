@@ -8,11 +8,7 @@ description: "Task list template for feature implementation"
 **Input**: Design documents from `/specs/[###-feature-name]/`
 **Prerequisites**: plan.md (required), spec.md (required for user stories), research.md, data-model.md, contracts/
 
-**Tests**: Tests are **OBLIGATORIOS** según Constitution. Seguir la pirámide de testing:
-- **Unit Tests** (50-70%): Funciones/métodos individuales
-- **Contract Tests** (10-15%): Interfaces API
-- **Integration Tests** (15-25%): Flujos multi-componente
-- **E2E Tests** (5-10%): Casos críticos completos
+**Tests**: The examples below include test tasks. Tests are OPTIONAL - only include them if explicitly requested in the feature specification.
 
 **Organization**: Tasks are grouped by user story to enable independent implementation and testing of each story.
 
@@ -55,47 +51,6 @@ description: "Task list template for feature implementation"
 - [ ] T001 Create project structure per implementation plan
 - [ ] T002 Initialize [language] project with [framework] dependencies
 - [ ] T003 [P] Configure linting and formatting tools
-- [ ] T004 [P] Setup test infrastructure (test runner, coverage tools)
-- [ ] T005 [P] Configure pre-commit hooks
-- [ ] T006 [P] Setup CI/CD pipeline configuration
-
----
-
-## Phase 1.5: Test Infrastructure Setup (OBLIGATORIO)
-
-**Purpose**: Shared test infrastructure and utilities
-
-**⚠️ CRITICAL**: Must be complete before writing ANY tests
-
-### Test Structure
-
-```
-tests/
-├── conftest.py              # Fixtures compartidos
-├── fixtures/                # Datos de prueba
-│   └── sample_data.json
-├── mocks/                   # Mocks reutilizables
-│   └── external_services.py
-├── unit/                    # Unit tests (50-70%)
-│   ├── models/
-│   ├── services/
-│   └── utils/
-├── contract/                # Contract tests (10-15%)
-├── integration/             # Integration tests (15-25%)
-└── e2e/                     # E2E tests (5-10%)
-```
-
-### Tareas
-
-- [ ] T007 Create tests/ directory structure
-- [ ] T008 [P] Configure conftest.py with base fixtures
-- [ ] T009 [P] Create tests/fixtures/ directory with sample data
-- [ ] T010 [P] Create tests/mocks/ with common mocks
-- [ ] T011 Setup coverage configuration (target: 80% overall)
-- [ ] T012 [P] Create unit test utilities in tests/unit/test_utils.py
-- [ ] T013 Document testing standards in tests/README.md
-
-**Checkpoint**: Test infrastructure ready - test writing can now begin
 
 ---
 
@@ -107,12 +62,12 @@ tests/
 
 Examples of foundational tasks (adjust based on your project):
 
-- [ ] T014 Setup database schema and migrations framework
-- [ ] T015 [P] Implement authentication/authorization framework
-- [ ] T016 [P] Setup API routing and middleware structure
-- [ ] T017 Create base models/entities that all stories depend on
-- [ ] T018 Configure error handling and logging infrastructure
-- [ ] T019 Setup environment configuration management
+- [ ] T004 Setup database schema and migrations framework
+- [ ] T005 [P] Implement authentication/authorization framework
+- [ ] T006 [P] Setup API routing and middleware structure
+- [ ] T007 Create base models/entities that all stories depend on
+- [ ] T008 Configure error handling and logging infrastructure
+- [ ] T009 Setup environment configuration management
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -124,64 +79,23 @@ Examples of foundational tasks (adjust based on your project):
 
 **Independent Test**: [How to verify this story works on its own]
 
-### Unit Tests for User Story 1 (OBLIGATORIOS) 🧪
+### Tests for User Story 1 (OPTIONAL - only if tests requested) ⚠️
 
-> **⚠️ TDD: Write these tests FIRST, ensure they FAIL, then implement**
+> **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-**Coverage Target**: 85% para esta user story
-
-#### Model Tests
-- [ ] T020 [P] [US1] Unit test for [Entity1] model validation in tests/unit/models/test_[entity1].py
-- [ ] T021 [P] [US1] Unit test for [Entity1] edge cases in tests/unit/models/test_[entity1].py
-- [ ] T022 [P] [US1] Unit test for [Entity2] model in tests/unit/models/test_[entity2].py
-
-#### Service Tests
-- [ ] T023 [P] [US1] Unit test for [Service] happy path in tests/unit/services/test_[service].py
-- [ ] T024 [P] [US1] Unit test for [Service] error handling in tests/unit/services/test_[service].py
-- [ ] T025 [P] [US1] Unit test for [Service] edge cases in tests/unit/services/test_[service].py
-
-#### Utils/Helpers Tests
-- [ ] T026 [P] [US1] Unit test for [helper function] in tests/unit/utils/test_[util].py
-
-**Checkpoint Unit Tests**: All unit tests written and FAILING ❌
-
-### Contract Tests for User Story 1 (Si aplica API) 📋
-
-- [ ] T027 [P] [US1] Contract test for [endpoint] request schema in tests/contract/test_[name].py
-- [ ] T028 [P] [US1] Contract test for [endpoint] response schema in tests/contract/test_[name].py
-- [ ] T029 [P] [US1] Contract test for [endpoint] error responses in tests/contract/test_[name].py
-
-### Integration Tests for User Story 1 🔗
-
-> **NOTE: Write these BEFORE implementation, ensure they FAIL**
-
-- [ ] T030 [P] [US1] Integration test for [user journey] happy path in tests/integration/test_[name].py
-- [ ] T031 [P] [US1] Integration test for [user journey] error scenarios in tests/integration/test_[name].py
-
-**Checkpoint Tests**: All tests (unit + contract + integration) written and FAILING ❌
+- [ ] T010 [P] [US1] Contract test for [endpoint] in tests/contract/test_[name].py
+- [ ] T011 [P] [US1] Integration test for [user journey] in tests/integration/test_[name].py
 
 ### Implementation for User Story 1
 
-> **⚠️ IMPLEMENTATION ONLY STARTS AFTER ALL TESTS ARE WRITTEN AND FAILING**
+- [ ] T012 [P] [US1] Create [Entity1] model in src/models/[entity1].py
+- [ ] T013 [P] [US1] Create [Entity2] model in src/models/[entity2].py
+- [ ] T014 [US1] Implement [Service] in src/services/[service].py (depends on T012, T013)
+- [ ] T015 [US1] Implement [endpoint/feature] in src/[location]/[file].py
+- [ ] T016 [US1] Add validation and error handling
+- [ ] T017 [US1] Add logging for user story 1 operations
 
-- [ ] T032 [P] [US1] Create [Entity1] model in src/models/[entity1].py
-- [ ] T033 [P] [US1] Create [Entity2] model in src/models/[entity2].py
-- [ ] T034 [US1] Implement [Service] in src/services/[service].py (depends on T032, T033)
-- [ ] T035 [US1] Implement [endpoint/feature] in src/[location]/[file].py
-- [ ] T036 [US1] Add validation and error handling
-- [ ] T037 [US1] Add logging for user story 1 operations
-
-**Checkpoint Implementation**: Code complete - now verify tests pass ✅
-
-### Verification for User Story 1
-
-- [ ] T038 Run all unit tests for US1 - should be GREEN ✅
-- [ ] T039 Run all contract tests for US1 - should be GREEN ✅
-- [ ] T040 Run all integration tests for US1 - should be GREEN ✅
-- [ ] T041 Verify coverage >= 85% for US1 code
-- [ ] T042 Verify no lint errors
-
-**Checkpoint**: At this point, User Story 1 should be fully functional, tested, and ready
+**Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
 ---
 
@@ -191,36 +105,17 @@ Examples of foundational tasks (adjust based on your project):
 
 **Independent Test**: [How to verify this story works on its own]
 
-### Unit Tests for User Story 2 (OBLIGATORIOS) 🧪
+### Tests for User Story 2 (OPTIONAL - only if tests requested) ⚠️
 
-> **⚠️ TDD: Write these tests FIRST, ensure they FAIL, then implement**
-
-- [ ] T043 [P] [US2] Unit tests for [Entity] model in tests/unit/models/test_[entity].py
-- [ ] T044 [P] [US2] Unit tests for [Service] in tests/unit/services/test_[service].py
-- [ ] T045 [P] [US2] Unit tests for helpers/utils in tests/unit/utils/test_[util].py
-
-### Contract Tests for User Story 2 (Si aplica API) 📋
-
-- [ ] T046 [P] [US2] Contract test for [endpoint] in tests/contract/test_[name].py
-
-### Integration Tests for User Story 2 🔗
-
-- [ ] T047 [P] [US2] Integration test for [user journey] in tests/integration/test_[name].py
-
-**Checkpoint Tests**: All US2 tests written and FAILING ❌
+- [ ] T018 [P] [US2] Contract test for [endpoint] in tests/contract/test_[name].py
+- [ ] T019 [P] [US2] Integration test for [user journey] in tests/integration/test_[name].py
 
 ### Implementation for User Story 2
 
-- [ ] T048 [P] [US2] Create [Entity] model in src/models/[entity].py
-- [ ] T049 [US2] Implement [Service] in src/services/[service].py
-- [ ] T050 [US2] Implement [endpoint/feature] in src/[location]/[file].py
-- [ ] T051 [US2] Integrate with User Story 1 components (if needed)
-
-### Verification for User Story 2
-
-- [ ] T052 Run all tests for US2 - should be GREEN ✅
-- [ ] T053 Verify coverage >= 85% for US2 code
-- [ ] T054 Verify US1 still passes (no regression)
+- [ ] T020 [P] [US2] Create [Entity] model in src/models/[entity].py
+- [ ] T021 [US2] Implement [Service] in src/services/[service].py
+- [ ] T022 [US2] Implement [endpoint/feature] in src/[location]/[file].py
+- [ ] T023 [US2] Integrate with User Story 1 components (if needed)
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work independently
 
@@ -232,32 +127,16 @@ Examples of foundational tasks (adjust based on your project):
 
 **Independent Test**: [How to verify this story works on its own]
 
-### Unit Tests for User Story 3 (OBLIGATORIOS) 🧪
+### Tests for User Story 3 (OPTIONAL - only if tests requested) ⚠️
 
-- [ ] T055 [P] [US3] Unit tests for [Entity] model in tests/unit/models/test_[entity].py
-- [ ] T056 [P] [US3] Unit tests for [Service] in tests/unit/services/test_[service].py
-
-### Contract Tests for User Story 3 (Si aplica API) 📋
-
-- [ ] T057 [P] [US3] Contract test for [endpoint] in tests/contract/test_[name].py
-
-### Integration Tests for User Story 3 🔗
-
-- [ ] T058 [P] [US3] Integration test for [user journey] in tests/integration/test_[name].py
-
-**Checkpoint Tests**: All US3 tests written and FAILING ❌
+- [ ] T024 [P] [US3] Contract test for [endpoint] in tests/contract/test_[name].py
+- [ ] T025 [P] [US3] Integration test for [user journey] in tests/integration/test_[name].py
 
 ### Implementation for User Story 3
 
-- [ ] T059 [P] [US3] Create [Entity] model in src/models/[entity].py
-- [ ] T060 [US3] Implement [Service] in src/services/[service].py
-- [ ] T061 [US3] Implement [endpoint/feature] in src/[location]/[file].py
-
-### Verification for User Story 3
-
-- [ ] T062 Run all tests for US3 - should be GREEN ✅
-- [ ] T063 Verify coverage >= 85% for US3 code
-- [ ] T064 Verify US1 and US2 still pass (no regression)
+- [ ] T026 [P] [US3] Create [Entity] model in src/models/[entity].py
+- [ ] T027 [US3] Implement [Service] in src/services/[service].py
+- [ ] T028 [US3] Implement [endpoint/feature] in src/[location]/[file].py
 
 **Checkpoint**: All user stories should now be independently functional
 
@@ -274,22 +153,9 @@ Examples of foundational tasks (adjust based on your project):
 - [ ] TXXX [P] Documentation updates in docs/
 - [ ] TXXX Code cleanup and refactoring
 - [ ] TXXX Performance optimization across all stories
+- [ ] TXXX [P] Additional unit tests (if requested) in tests/unit/
 - [ ] TXXX Security hardening
 - [ ] TXXX Run quickstart.md validation
-
-### E2E Tests (Casos Críticos) 🎯
-
-> **Solo para flujos críticos completos (5-10% de tests)**
-
-- [ ] TXXX [P] E2E test for critical user flow in tests/e2e/test_[flow].py
-- [ ] TXXX [P] E2E test for payment flow (if applicable) in tests/e2e/test_payment.py
-
-### Coverage Final
-
-- [ ] TXXX Run full test suite and verify all passing ✅
-- [ ] TXXX Verify overall coverage >= 80%
-- [ ] TXXX Generate coverage report
-- [ ] TXXX Verify pyramid ratio (50-70% unit, 10-15% contract, 15-25% integration, 5-10% e2e)
 
 ---
 
@@ -312,15 +178,10 @@ Examples of foundational tasks (adjust based on your project):
 
 ### Within Each User Story
 
-- **Tests FIRST** (TDD obligatorio):
-  1. Write unit tests → FAIL ❌
-  2. Write contract tests → FAIL ❌
-  3. Write integration tests → FAIL ❌
-  4. Implement code → Tests pass ✅
+- Tests (if included) MUST be written and FAIL before implementation
 - Models before services
 - Services before endpoints
 - Core implementation before integration
-- Verification after implementation
 - Story complete before moving to next priority
 
 ### Parallel Opportunities
@@ -337,24 +198,13 @@ Examples of foundational tasks (adjust based on your project):
 ## Parallel Example: User Story 1
 
 ```bash
-# Step 1: Launch all UNIT tests for User Story 1 together:
-Task: "Unit test for [Entity1] model in tests/unit/models/test_[entity1].py"
-Task: "Unit test for [Entity2] model in tests/unit/models/test_[entity2].py"
-Task: "Unit test for [Service] in tests/unit/services/test_[service].py"
-
-# Step 2: Launch all CONTRACT tests together:
+# Launch all tests for User Story 1 together (if tests requested):
 Task: "Contract test for [endpoint] in tests/contract/test_[name].py"
-
-# Step 3: Launch all INTEGRATION tests together:
 Task: "Integration test for [user journey] in tests/integration/test_[name].py"
 
-# Step 4: Verify all tests FAIL ❌ (Red phase of TDD)
-
-# Step 5: Launch all models implementation together (after tests fail):
+# Launch all models for User Story 1 together:
 Task: "Create [Entity1] model in src/models/[entity1].py"
 Task: "Create [Entity2] model in src/models/[entity2].py"
-
-# Step 6: Verify tests now PASS ✅ (Green phase of TDD)
 ```
 
 ---
@@ -395,48 +245,7 @@ With multiple developers:
 - [P] tasks = different files, no dependencies
 - [Story] label maps task to specific user story for traceability
 - Each user story should be independently completable and testable
-- **TDD OBLIGATORIO**: Tests fail → Implement → Tests pass ✅
+- Verify tests fail before implementing
 - Commit after each task or logical group
 - Stop at any checkpoint to validate story independently
 - Avoid: vague tasks, same file conflicts, cross-story dependencies that break independence
-- **Coverage**: Mantener siempre >= 80% overall
-- **Pyramid ratio**: Verificar distribución correcta de tipos de tests
-
-## Test Naming Conventions
-
-### Unit Tests
-
-```python
-def test_<función>_<escenario>_<resultado_esperado>():
-    """
-    Ejemplos:
-    - test_calculate_total_with_discount_returns_reduced_price()
-    - test_validate_email_with_invalid_format_raises_error()
-    - test_get_user_when_not_found_returns_none()
-    """
-    pass
-```
-
-### Integration Tests
-
-```python
-def test_<user_story>_<flujo>():
-    """
-    Ejemplos:
-    - test_us1_user_can_complete_checkout()
-    - test_us2_admin_creates_product_successfully()
-    """
-    pass
-```
-
-### Contract Tests
-
-```python
-def test_<endpoint>_<método>_<validación>():
-    """
-    Ejemplos:
-    - test_post_users_validates_required_fields()
-    - test_get_products_returns_correct_schema()
-    """
-    pass
-```
