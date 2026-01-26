@@ -1,6 +1,3 @@
-description = "Create or update the feature specification from a natural language feature description."
-
-prompt = """
 ---
 description: Create or update the feature specification from a natural language feature description.
 handoffs: 
@@ -11,6 +8,7 @@ handoffs:
     agent: speckit.clarify
     prompt: Clarify specification requirements
     send: true
+
 ---
 
 ## User Input
@@ -23,7 +21,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Outline
 
-The text the user typed after `/speckit.specify` in the triggering message **is** the feature description. Assume you always have it available in this conversation even if `{{args}}` appears literally below. Do not ask the user to repeat it unless they provided an empty command.
+The text the user typed after `/speckit.specify` in the triggering message **is** the feature description. Assume you always have it available in this conversation even if `{ARGS}` appears literally below. Do not ask the user to repeat it unless they provided an empty command.
 
 Given that feature description, do this:
 
@@ -57,21 +55,25 @@ Given that feature description, do this:
       - Find the highest number N
       - Use N+1 for the new branch number
 
-   d. Run the script `.specify/scripts/bash/create-new-feature.sh --json "{{args}}"` with the calculated number and short-name:
-      - Pass `--number N+1` and `--short-name "your-short-name"` along with the feature description
-      - Bash example: `.specify/scripts/bash/create-new-feature.sh --json "{{args}}" --json --number 5 --short-name "user-auth" "Add user authentication"`
-      - PowerShell example: `.specify/scripts/bash/create-new-feature.sh --json "{{args}}" -Json -Number 5 -ShortName "user-auth" "Add user authentication"`
+   d. **Create Branch and Define Paths**:
+      - Construct the branch name: `BRANCH_NAME = [N]-[short-name]`
+      - Construct the spec file path: `SPEC_FILE = specs/[BRANCH_NAME]/spec.md`
+      - **Action**: Use the `git_manager` skill to create and checkout the new branch:
+        ```bash
+        git checkout -b [BRANCH_NAME]
+        ```
+      - **Action**: Create the directory for the spec file if it doesn't exist:
+        ```bash
+        mkdir -p specs/[BRANCH_NAME]
+        ```
 
    **IMPORTANT**:
    - Check all three sources (remote branches, local branches, specs directories) to find the highest number
    - Only match branches/directories with the exact short-name pattern
    - If no existing branches/directories found with this short-name, start with number 1
-   - You must only ever run this script once per feature
-   - The JSON is provided in the terminal as output - always refer to it to get the actual content you're looking for
-   - The JSON output will contain BRANCH_NAME and SPEC_FILE paths
-   - For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\\''m Groot' (or double-quote if possible: "I'm Groot")
+   - Proceed to write the spec file in the defined SPEC_FILE location
 
-3. Load `.specify/templates/spec-template.md` to understand required sections.
+3. Load `templates/spec-template.md` to understand required sections.
 
 4. Follow this execution flow:
 
@@ -195,7 +197,7 @@ Given that feature description, do this:
 
 7. Report completion with branch name, spec file path, checklist results, and readiness for the next phase (`/speckit.clarify` or `/speckit.plan`).
 
-**NOTE:** The script creates and checks out the new branch and initializes the spec file before writing.
+**NOTE:** The agent creates and checks out the new branch and initializes the spec file before writing.
 
 ## General Guidelines
 
@@ -259,4 +261,3 @@ Success criteria must be:
 - "Database can handle 1000 TPS" (implementation detail, use user-facing metric)
 - "React components render efficiently" (framework-specific)
 - "Redis cache hit rate above 80%" (technology-specific)
-"""
