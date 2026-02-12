@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir /s /b \"C:\\\\Users\\\\julian.benavides_dav\\\\Desktop\\\\geminicli\\\\knowledge-as-code\")"
+    ]
+  }
+}
